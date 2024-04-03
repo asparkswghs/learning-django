@@ -76,8 +76,14 @@ django-admin startapp <appname>
         from . import views
 
         urlpatterns = [
-            path('/base', views.base, name='base')
+            path('page_name/', views.page_name, name='page_name')
         ]
         ```
+        > Note! It's considered best practice to use trailing slashes in Django
 
 
+<details>
+
+Try this page on [*Django Best Practices That'll Keep Your Developers Happy*](https://www.freecodecamp.org/news/django-project-best-practices-for-happy-developers/)
+
+</details>
