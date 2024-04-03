@@ -2,6 +2,7 @@
 
 ## Django project
 
+#### Setup
 ```sh
 # Create project
 django-admin startproject <projname>
@@ -10,7 +11,7 @@ django-admin startproject <projname>
 cd <projname>
 
 # Create app
-django-admin startapp <name>
+django-admin startapp <appname>
 
 # Run server
 ./manage.py runserver
@@ -21,3 +22,13 @@ django-admin startapp <name>
 # Create super user
 ./manage.py createsuperuser
 ```
+#### Development
+1. Install your app
+    - Edit `<projname>/<projname>/settings.py`
+        ```python
+        INSTALLED_APPS = [
+            ...,
+            <appname>, # Add this line
+        ]
+        ```
+    
