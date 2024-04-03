@@ -7,3 +7,9 @@ def base(request):
 
     }
     return render(request, 'base.html', context)
+
+def root(request):
+    context = {
+
+    }
+    return render(request, 'root.html', context)
