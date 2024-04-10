@@ -87,3 +87,33 @@ django-admin startapp <appname>
 Try this page on [*Django Best Practices That'll Keep Your Developers Happy*](https://www.freecodecamp.org/news/django-project-best-practices-for-happy-developers/)
 
 </details>
+
+
+## Inheriting Page Content
+
+base.html
+```html
+...
+<!-- HTML Content goes here! Head, header, navbar, etc. -->
+{% block content %}
+
+{% endblock %}
+
+<!-- Footer -->
+```
+your_page.html
+```html
+...
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Content goes here! -->
+
+{% endblock %}
+```
+
+## Making changes to the database
+
+1. Saving changes: `./manage.py makemigrations`
+
+2. Build changes to database: `./manage.py migrate`
