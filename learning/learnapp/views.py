@@ -13,3 +13,9 @@ def root(request):
 
     }
     return render(request, 'root.html', context)
+
+def students(request):
+    context = {
+
+    }
+    return render(request, 'students.html', context)
