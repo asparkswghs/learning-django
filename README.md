@@ -1,5 +1,17 @@
 # Learning Django!
 
+#### Run (Development Server)
+
+```bash
+# Get the source code
+git clone https://github.com/asparkswghs/learning-django
+
+cd learning-django/learning
+
+# Run the Development Server
+./manage.py runserver
+```
+
 #### Development
 
 1. Create venv
