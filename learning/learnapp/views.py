@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Student
+from .models import Student, Teacher
 
 # Create your views here.
 
@@ -14,3 +14,9 @@ def students(request):
         'students': Student.objects.all(), # Pass all student objects
     }
     return render(request, 'students.html', context)
+
+def teachers(request):
+    context = {
+        'teachers': Teacher.objects.all(), # Pass all teacher objects
+    }
+    return render(request, 'teachers.html', context)
