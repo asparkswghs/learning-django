@@ -10,10 +10,10 @@ class Student(models.Model):
         ('12', '12')
     )
 
-    first_name = models.CharField(max_length=200, null=True)
-    last_name = models.CharField(max_length=200, null=True)
-    middle_name = models.CharField(max_length=200, null=True)
-    grade = models.CharField(max_length=200, null=True, choices=GRADES)
+    first_name = models.CharField(max_length=200, null=True, verbose_name='First Name')
+    last_name = models.CharField(max_length=200, null=True, verbose_name='Last Name')
+    middle_name = models.CharField(max_length=200, null=True, verbose_name='Middle Name')
+    grade = models.CharField(max_length=200, null=True, choices=GRADES, verbose_name='Grade')
 
     def __str__(self):
         return f'{self.last_name}, {self.first_name}'
