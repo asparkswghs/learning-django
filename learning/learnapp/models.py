@@ -43,3 +43,6 @@ class Teacher(models.Model):
     last_name = models.CharField(max_length=200, null=True)
     title = models.CharField(max_length=10, null=True, choices=TITLES)
     department = models.CharField(max_length=30, null=True, choices=DEPARTMENTS)
+
+    def __str__(self):
+        return f'{self.title}. {self.last_name}, {self.first_name}'
