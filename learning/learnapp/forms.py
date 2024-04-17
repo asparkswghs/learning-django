@@ -12,3 +12,13 @@ class StudentForm(forms.ModelForm):
             'middle_name',
             'grade',
         ]
+
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = [
+            'first_name',
+            'last_name',
+            'title',
+            'department',
+        ]

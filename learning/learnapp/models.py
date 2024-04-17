@@ -39,10 +39,10 @@ class Teacher(models.Model):
         ('Physical Education', 'Physical Education')
     )
 
-    first_name = models.CharField(max_length=200, null=True)
-    last_name = models.CharField(max_length=200, null=True)
-    title = models.CharField(max_length=10, null=True, choices=TITLES)
-    department = models.CharField(max_length=30, null=True, choices=DEPARTMENTS)
+    first_name = models.CharField(max_length=200, null=True, verbose_name='First Name')
+    last_name = models.CharField(max_length=200, null=True, verbose_name='Last Name')
+    title = models.CharField(max_length=10, null=True, choices=TITLES, verbose_name='Title')
+    department = models.CharField(max_length=30, null=True, choices=DEPARTMENTS, verbose_name='Department')
 
     def __str__(self):
         return f'{self.title}. {self.last_name}, {self.first_name}'

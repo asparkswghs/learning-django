@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Student, Teacher
-from .forms import StudentForm
+from .forms import StudentForm, TeacherForm
 
 # Create your views here.
 
@@ -29,7 +29,7 @@ def student_form(request):
     if request.method == 'POST': # For button click
         form = StudentForm(request.POST)
         if form.is_valid():
-            for name, value in form.cleaned_data.items:
+            for name, value in form.cleaned_data.items():
                 print(f"{name}: ({type(value)}, {value})")
         # Save data locally, but not to DB yet
         requests = form.save(commit=False)
@@ -48,5 +48,34 @@ def student_form(request):
     return render(
         request,
         'student_form.html',
+        context,
+        )
+
+def teacher_form(request):
+    context = {
+
+    }
+    if request.method == 'POST': # For button click
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            for name, value in form.cleaned_data.items():
+                print(f"{name}: ({type(value)}, {value})")
+        # Save data locally, but not to DB yet
+        requests = form.save(commit=False)
+
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        title = form.cleaned_data['title']
+        department = form.cleaned_data['department']
+        requests.save()
+    else: # Load blank form if not a form submission
+        form = TeacherForm()
+    
+    context['method'] = request.method
+    context['form'] = form
+
+    return render(
+        request,
+        'teacher_form.html',
         context,
         )
