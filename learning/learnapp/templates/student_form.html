@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% block head %}
-
-{% endblock %}
+{% block title %}Student Form - {% endblock %}
 
 {% block content %}
 <style>
@@ -16,14 +14,20 @@
     <h2>Create a Student</h2>
 </div>
 
-    {% csrf_token %}
-    <div class="card" align="center">
+<div class="card" align="center">
+    {% if method == 'GET' %}
+    <form method="post">
+        {% csrf_token %}
         <div class="card-body">
             {{ form.as_p }}
         </div>
         <button type="submit" class="btn btn-primary" value="submit" id="submit_button">
             Submit
         </button>
-    </div>
+    </form>
+    {% else %}
+    <h3>Success!</h3>
+    {% endif %}
+</div>
 
 {% endblock %}
