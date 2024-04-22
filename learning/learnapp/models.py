@@ -36,7 +36,8 @@ class Teacher(models.Model):
         ('Social Studies', 'Social Studies'),
         ('Science', 'Science'),
         ('Foreign Language', 'Foreign Language'),
-        ('Physical Education', 'Physical Education')
+        ('Physical Education', 'Physical Education'),
+        ('Drama', 'Drama'),
     )
 
     first_name = models.CharField(max_length=200, null=True, verbose_name='First Name')
