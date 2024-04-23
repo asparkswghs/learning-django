@@ -26,18 +26,8 @@
         {% block head %}
 
         {% endblock %}
-        <style>
-          body {
-              margin: 100px,
-              width: 600px,
-          }
-          .message {
-            background-color: #41b560,
-            padding-left: 8px,
-            padding-right: 8px,
-            padding-top: 8px,
-            padding-bottom: 8px,
-          }
+        <style type="text/css" rel="stylesheet">
+{% include 'style.css' %}
         </style>
 
     </head>
@@ -79,9 +69,9 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please upgrade your browser to improve your experience.</p>
         <![endif]-->
-
+        
+        <br><br><br> <!-- Sorry abt that real webdevs D: -->
         <div id="content" class="container-fluid">
-          <br><br><br> <!-- Sorry abt that real webdevs D: -->
           {% block content %}
           {% endblock %}
         </div>
