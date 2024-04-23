@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from .models import Student, Teacher
 from .forms import StudentForm, TeacherForm
 
@@ -39,6 +40,12 @@ def student_form(request):
         middle_name = form.cleaned_data['middle_name']
         grade = form.cleaned_data['grade']
         requests.save()
+
+        # Confirmation Message
+        messages.success(request, 'New Student Added Successfully!')
+
+        form = StudentForm() # Reset form for new submission
+
     else: # Load blank form if not a form submission
         form = StudentForm()
     
@@ -68,6 +75,12 @@ def teacher_form(request):
         title = form.cleaned_data['title']
         department = form.cleaned_data['department']
         requests.save()
+
+        # Confirmation Message
+        messages.success(request, 'New Teacher Added Successfully!')
+
+        form = TeacherForm() # Reset form for new submission
+
     else: # Load blank form if not a form submission
         form = TeacherForm()
     
