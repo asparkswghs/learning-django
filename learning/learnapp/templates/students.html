@@ -3,27 +3,28 @@
 {% block title %}Students - {% endblock %}
 
 {% block content %}
-<br>
-<div align="center">
-    <h2>Students</h2>
+<div id="content" class="container-fluid">
+    <br>
+    <div align="center">
+        <h2>Students</h2>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Grade</th>
+        </thead>
+
+        {% for s in students %}
+            <tr>
+                <td>{{ s.last_name }}</td>
+                <td>{{ s.first_name }}</td>
+                <td>{{ s.middle_name }}</td>
+                <td>{{ s.grade }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
-
-<table class="table table-striped">
-    <thead>
-        <th>Last Name</th>
-        <th>First Name</th>
-        <th>Middle Name</th>
-        <th>Grade</th>
-    </thead>
-
-    {% for s in students %}
-        <tr>
-            <td>{{ s.last_name }}</td>
-            <td>{{ s.first_name }}</td>
-            <td>{{ s.middle_name }}</td>
-            <td>{{ s.grade }}</td>
-        </tr>
-    {% endfor %}
-</table>
-
 {% endblock %}

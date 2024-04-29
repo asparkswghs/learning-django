@@ -16,7 +16,7 @@
         -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{% block title %}{% endblock %}Learning Django</title>
+        <title>{% block title %}{% endblock %}Student Club Connect</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
@@ -37,7 +37,7 @@
         <div id="nav">
           <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="/"><img src="{% static 'svg/mortarboard-nav.svg' %}"> Learning Django</a>
+              <a class="navbar-brand" href="/"><img src="{% static 'svg/mortarboard-nav.svg' %}"> Student Club Connect</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -61,7 +61,7 @@
                 </ul>
                 <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
+                  <button id="search" class="btn btn-outline-success" type="submit">Search</button>
                 </form>
               </div>
             </div>
@@ -72,10 +72,8 @@
         <![endif]-->
         
         <br><br> <!-- Sorry abt that real webdevs D: -->
-        <div id="content" class="container-fluid">
           {% block content %}
           {% endblock %}
-        </div>
 
         <div id="footer" class="container">
           <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

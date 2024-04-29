@@ -5,122 +5,117 @@
 <!-- Homepage Content -->
 
 <!-- Carousel -->
-<div id="root-carousel" class="carousel slide mb-6" data-bs-ride="carousel">
+<div id="root-carousel" class="carousel slide">
+  <!-- Indicators -->
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#root-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#root-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#root-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
+  <!-- Slides -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-      <div class="container">
-        <div class="carousel-caption text-start">
-          <h1>Example headline.</h1>
-          <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-        </div>
+      <img class="carousel-image" src="{% static 'images/book-club.jpg' %}">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Book Club</h5>
+        <p>Read and discuss interesting novels</p>
       </div>
     </div>
     <div class="carousel-item">
-      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Another example headline.</h1>
-          <p>Some representative placeholder content for the second slide of the carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-        </div>
+      <img class="carousel-image" src="{% static 'images/tea-club.jpeg' %}">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Tea Club</h5>
+        <p>Drink and appreciate the finer points of life</p>
       </div>
     </div>
     <div class="carousel-item">
-      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-      <div class="container">
-        <div class="carousel-caption text-end">
-          <h1>One more for good measure.</h1>
-          <p>Some representative placeholder content for the third slide of this carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-        </div>
+      <img class="carousel-image" src="{% static 'images/art-club.jpeg' %}">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Art Club</h5>
+        <p>Express yourself through your art with fellow artists</p>
       </div>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#root-carousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#root-carousel" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
 
-<!-- Jumbotron with Buttons -->
-<div id="root-jumbotron" class="container my-5">
-    <div class="p-5 text-center bg-body-tertiary rounded-3">
-      <img src="{% static 'svg/mortarboard.svg' %}" alt="Graduation hat logo">
-      <h1 class="text-body-emphasis">Student Club Connect</h1>
-      <p class="col-lg-8 mx-auto fs-5 text-muted">
-        An integrated hub for teacher-sponsored school-sanctioned student clubs
-      </p>
-      <div class="d-inline-flex gap-2 mb-5">
-        <a href="{% url 'students' %}">
-            <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button">
-            Students
-            <img src="{% static 'svg/arrow-right.svg' %}">
-            </button>
-        </a>
-        <a href="{% url 'teachers' %}">
-            <button class="btn btn-outline-secondary btn-lg px-4 rounded-pill" type="button">
-            Teacher Sponsors
-            </button>
-        </a>
-      </div>
-    </div>
-  </div>
-
-<!-- Feature Cards -->
-<div class="container px-4 py-5" id="custom-cards">
-  <h2 class="pb-2 border-bottom">Features</h2>
-
-  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-    <div class="col">
-      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/static/images/calendar.jpg');">
-        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Schedule club meetings efforlessly.</h3>
-          <ul class="d-flex list-unstyled mt-auto">
-            <li class="me-auto">
-              <img src="{% static 'svg/mortarboard-nav.svg' %}" alt="Student Club Connect" width="32" height="32" class="rounded-circle border border-white">
-            </li>
-          </ul>
+<div id="content" class="container-fluid">
+  <!-- Jumbotron with Buttons -->
+  <div id="root-jumbotron" class="container my-5">
+      <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <img src="{% static 'svg/mortarboard.svg' %}" alt="Graduation hat logo">
+        <h1 class="text-body-emphasis">Student Club Connect</h1>
+        <p class="col-lg-8 mx-auto fs-5 text-muted">
+          An integrated hub for teacher-sponsored school-sanctioned student clubs
+        </p>
+        <div class="d-inline-flex gap-2 mb-5">
+          <a href="{% url 'students' %}">
+              <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button">
+              Students
+              <img src="{% static 'svg/arrow-right.svg' %}">
+              </button>
+          </a>
+          <a href="{% url 'teachers' %}">
+              <button class="btn btn-outline-secondary btn-lg px-4 rounded-pill" type="button">
+              Teacher Sponsors
+              </button>
+          </a>
         </div>
       </div>
     </div>
 
-    <div class="col">
-      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/static/images/alarm-clock.jpeg');">
-        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Always be on time for your clubs.</h3>
-          <ul class="d-flex list-unstyled mt-auto">
-            <li class="me-auto">
-              <img src="{% static 'svg/mortarboard-nav.svg' %}" alt="Student Club Connect" width="32" height="32" class="rounded-circle border border-white">
-            </li>
-          </ul>
+  <!-- Feature Cards -->
+  <div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom">Features</h2>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/static/images/calendar.jpg');">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Schedule club meetings efforlessly.</h3>
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="{% static 'svg/mortarboard-nav.svg' %}" alt="Student Club Connect" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col">
-      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/static/images/club-meeting.jpg');">
-        <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-          <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Find new clubs to attend.</h3>
-          <ul class="d-flex list-unstyled mt-auto">
-            <li class="me-auto">
-              <img src="{% static 'svg/mortarboard-nav.svg' %}" alt="Student Club Connect" width="32" height="32" class="rounded-circle border border-white">
-            </li>
-          </ul>
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/static/images/alarm-clock.jpeg');">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Always be on time for your clubs.</h3>
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="{% static 'svg/mortarboard-nav.svg' %}" alt="Student Club Connect" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/static/images/club-meeting.jpg');">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Find new clubs to attend.</h3>
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="{% static 'svg/mortarboard-nav.svg' %}" alt="Student Club Connect" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock %}
