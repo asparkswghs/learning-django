@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Student, Teacher
 from .forms import StudentForm, TeacherForm
 
@@ -12,10 +13,14 @@ def root(request):
     return render(request, 'root.html', context)
 
 def students(request):
-    context = {
-        'students': Student.objects.all(), # Pass all student objects
-    }
-    return render(request, 'students.html', context)
+    if not request.user.is_authenticated:
+        return redirect(auth_login)
+    else:
+        context = {
+            'students': Student.objects.all(), # Pass all student objects
+        }
+        return render(request, 'students.html', context)
+    
 
 def teachers(request):
     context = {
@@ -92,3 +97,17 @@ def teacher_form(request):
         'teacher_form.html',
         context,
         )
+
+def auth_login(request):
+    form = AuthenticationForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'auth/login.html', context)
+
+def auth_register(request):
+    form = UserCreationForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'auth/register.html', context)

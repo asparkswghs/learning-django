@@ -52,17 +52,25 @@
                   <li class="nav-item">
                     <a class="nav-link" aria-disabled="true" href="{% url 'teachers' %}">Teachers</a>
                   </li>
+                  {% if request.user.groups.all.name == "teacher" %}
                   <li class="nav-item">
                     <a class="nav-link" aria-disabled="true" href="{% url 'student_form' %}">Student Form</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" aria-disabled="true" href="{% url 'teacher_form' %}">Teacher Form</a>
                   </li>
+                  {% endif %}
                 </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button id="search" class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+
+                {% if user.is_authenticated %}
+                  <a href="{% url 'logout' %}">
+                    <button id="logout" class="btn btn-outline-danger" type="submit">Log Out</button>
+                  </a>
+                {% else %}
+                  <a href="{% url 'auth_login' %}">
+                    <button id="login" class="btn btn-outline-success" type="submit">Log In</button>
+                  </a>
+                {% endif %}
               </div>
             </div>
           </nav>

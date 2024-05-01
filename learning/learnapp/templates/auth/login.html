@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - {% endblock %}
+
+{% block head %}
+<style>
+html,
+body {
+  height: 100%;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin span[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<main class="form-signin w-100 m-auto">
+    <form method="post">
+        {% csrf_token %}
+        <img class="mb-4" src="{% static 'svg/mortarboard.svg' %}" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <!--{{ form }}-->
+
+        {% for field in form %}
+            {% if field.label == 'Username' %}
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingInput"  placeholder="johndoe" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+                    {% for error in  field.errors %}<span class="help-inline">{{ error }}</span>{% endfor %}
+                    <label for="floatingInput">User name</label>
+                </div>
+            {% elif field.label == 'Password' %}
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" autocomplete="current-password" required id="id_password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            {% else %}
+            <div class="form-floaring">
+                <label class='control-label'>{{ field.label }}</label>
+                <div class="controls">
+                    {{ field }}
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+
+        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
+    </form>
+</main>
+
+{% endblock %}
