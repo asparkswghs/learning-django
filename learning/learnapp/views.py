@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login 
 from .models import Student, Teacher
-from .forms import StudentForm, TeacherForm
+from .forms import StudentForm, TeacherForm, RegistrationForm
 
 # Create your views here.
 
@@ -106,8 +107,17 @@ def auth_login(request):
     return render(request, 'auth/login.html', context)
 
 def auth_register(request):
-    form = UserCreationForm()
+    form = RegistrationForm()
     context = {
         'form': form,
     }
+    if request.method == 'POST':
+        form = RegistrationForm(request.post)
+        if form.is_valid():
+            user = form.save()
+            login(request,user)
+            return redirect('')
+        else:
+            form = RegistrationForm()
+
     return render(request, 'auth/register.html', context)
