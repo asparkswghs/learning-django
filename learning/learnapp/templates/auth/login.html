@@ -65,9 +65,12 @@ body {
             {% endif %}
         {% endfor %}
 
-        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        <br>
+        <button class="btn btn-primary w-100 py-2" type="submit" value="submit">Sign in</button>
         <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
     </form>
+    <br>
+    <h7>Don't have an account? <a href="{% url 'auth_register' %}">Register</a></h7>
 </main>
 
 {% endblock %}
