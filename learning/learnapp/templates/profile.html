@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile - {% endblock %}
+
+{% block head %}
+<style type="text/css">
+.card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+    align: center;
+}
+
+@media only screen and (maxwidth: 1000px) {
+    .card {
+        width: 100%;
+        background-color: red;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Profile</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary"><hr></h6>
+        <p class="card-text">
+            <table id="profile" class="table table-striped">
+                <tr>
+                    <th>First Name</th>
+                    <td>{{ request.user.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{{ request.user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ request.user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ request.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Last Login</th>
+                    <td>{{ request.user.last_login }}</td>
+                </tr>
+                <tr>
+                    <th>First Login</th>
+                    <td>{{ request.user.date_joined }}</td>
+                </tr>
+                <tr>
+                    <th>Groups</th>
+                    <td>
+                        <ul>
+                            {% for group in request.user.groups.all %}<li>{{ group.name }}</li>{% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
