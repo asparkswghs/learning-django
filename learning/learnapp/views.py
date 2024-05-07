@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login 
+from django.contrib.auth import login, authenticate
 from .models import Student, Teacher
 from .forms import StudentForm, TeacherForm, RegistrationForm
 
@@ -24,15 +24,20 @@ def students(request):
     
 
 def teachers(request):
-    context = {
-        'teachers': Teacher.objects.all(), # Pass all teacher objects
-    }
-    return render(request, 'teachers.html', context)
+    if not request.user.is_authenticated:
+        return redirect(auth_login)
+    else:
+        context = {
+            'teachers': Teacher.objects.all(), # Pass all teacher objects
+        }
+        return render(request, 'teachers.html', context)
 
 def student_form(request):
     context = {
 
     }
+    if not request.user.is_authenticated:
+        return redirect(auth_login)
     if request.method == 'POST': # For button click
         form = StudentForm(request.POST)
         if form.is_valid():
@@ -68,6 +73,8 @@ def teacher_form(request):
     context = {
 
     }
+    if not request.user.is_authenticated:
+        return redirect(auth_login)
     if request.method == 'POST': # For button click
         form = TeacherForm(request.POST)
         if form.is_valid():
@@ -104,20 +111,26 @@ def auth_login(request):
     context = {
         'form': form,
     }
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        try:
+            user = authenticate(request.POST)
+            login(request, user)
+            return redirect('/')
+        except:
+            return render(request, 'auth/login.html', {'form': form})
+
     return render(request, 'auth/login.html', context)
 
 def auth_register(request):
-    form = RegistrationForm()
-    context = {
-        'form': form,
-    }
     if request.method == 'POST':
-        form = RegistrationForm(request.post)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request,user)
             return redirect('')
         else:
-            form = RegistrationForm()
+            print('Registration: FORM IS INVALID.')
+            return render(request, 'auth/register.html', {'form': RegistrationForm()})
 
-    return render(request, 'auth/register.html', context)
+    return render(request, 'auth/register.html', {'form': RegistrationForm()})
