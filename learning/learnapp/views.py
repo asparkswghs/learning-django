@@ -118,9 +118,9 @@ def auth_login(request):
             login(request, user)
             return redirect('/')
         except:
-            return render(request, 'auth/login.html', {'form': form})
+            return render(request, 'auth/login.html', {'form': AuthenticationForm()})
 
-    return render(request, 'auth/login.html', context)
+    return render(request, 'auth/login.html', {'form': AuthenticationForm()})
 
 def auth_register(request):
     if request.method == 'POST':
