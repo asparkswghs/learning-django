@@ -134,3 +134,10 @@ def auth_register(request):
             return render(request, 'auth/register.html', {'form': RegistrationForm()})
 
     return render(request, 'auth/register.html', {'form': RegistrationForm()})
+
+def profile(request):
+    context = {
+        'student_accounts': Student.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
+        'teacher_accounts': Teacher.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
+    }
+    return render(request, 'profile.html', context)

@@ -9,8 +9,8 @@
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5rem;
     align: center;
+    margin-top: 2rem;
 }
 
 @media only screen and (maxwidth: 1000px) {
@@ -25,7 +25,7 @@
 {% block content %}
 
 
-<div class="card">
+<div class="card first-card">
     <div class="card-body">
         <h5 class="card-title">Profile</h5>
         <h6 class="card-subtitle mb-2 text-body-secondary"><hr></h6>
@@ -67,5 +67,61 @@
         </p>
     </div>
 </div>
+
+{% for student in student_accounts %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Student Data</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary"><hr></h6>
+        <p class="card-text">
+            <table id="profile" class="table table-striped">
+                <tr>
+                    <th>First Name</th>
+                    <td>{{ student.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{{ student.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Middle Name</th>
+                    <td>{{ student.middle_name }}</td>
+                </tr>
+                <tr>
+                    <th>Grade</th>
+                    <td>{{ student.grade }}</td>
+                </tr>
+            </table>
+        </p>
+    </div>
+</div> {% endfor %}
+
+{% for teacher in teacher_accounts %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Teacher Data</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary"><hr></h6>
+        <p class="card-text">
+            <table id="profile" class="table table-striped">
+                <tr>
+                    <th>Title</th>
+                    <td>{{ teacher.title }}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{{ teacher.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>First Name</th>
+                    <td>{{ teacher.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Department</th>
+                    <td>{{ teacher.department }}</td>
+                </tr>
+            </table>
+        </p>
+    </div>
+</div> {% endfor %}
 
 {% endblock %}
