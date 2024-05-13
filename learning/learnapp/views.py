@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from .models import Student, Teacher
 from .forms import StudentForm, TeacherForm, RegistrationForm
 
@@ -13,31 +14,26 @@ def root(request):
     }
     return render(request, 'root.html', context)
 
+@login_required
 def students(request):
-    if not request.user.is_authenticated:
-        return render(request, 'registration/error-login.html', {})
-    else:
-        context = {
-            'students': Student.objects.all(), # Pass all student objects
-        }
-        return render(request, 'students.html', context)
+    context = {
+        'students': Student.objects.all(), # Pass all student objects
+    }
+    return render(request, 'students.html', context)
     
 
+@login_required
 def teachers(request):
-    if not request.user.is_authenticated:
-        return render(request, 'registration/error-login.html', {})
-    else:
-        context = {
-            'teachers': Teacher.objects.all(), # Pass all teacher objects
-        }
-        return render(request, 'teachers.html', context)
+    context = {
+        'teachers': Teacher.objects.all(), # Pass all teacher objects
+    }
+    return render(request, 'teachers.html', context)
 
+@login_required
 def student_form(request):
     context = {
 
     }
-    if not request.user.is_authenticated:
-        return render(request, 'registration/error-login.html', {})
     if request.method == 'POST': # For button click
         form = StudentForm(request.POST)
         if form.is_valid():
@@ -69,12 +65,11 @@ def student_form(request):
         context,
         )
 
+@login_required
 def teacher_form(request):
     context = {
 
     }
-    if not request.user.is_authenticated:
-        return render(request, 'registration/error-login.html', {})
     if request.method == 'POST': # For button click
         form = TeacherForm(request.POST)
         if form.is_valid():
@@ -136,13 +131,10 @@ def register(request):
 
     return render(request, 'registration/register.html', {'form': RegistrationForm()})
 
+@login_required
 def profile(request):
-    if request.user.is_authenticated:
-        context = {
-            'student_accounts': Student.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
-            'teacher_accounts': Teacher.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
-        }
-        return render(request, 'profile.html', context)
-    else:
-        context = {}
-        return render(request, 'registration/error-login.html', context)
+    context = {
+        'student_accounts': Student.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
+        'teacher_accounts': Teacher.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
+    }
+    return render(request, 'profile.html', context)
