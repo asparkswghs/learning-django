@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Error: Not Logged In - {% endblock %}
+
+{% block content %}
+<div align="center" style="margin-top: 15rem; margin-bottom: 15rem;">
+    <h1 id="error-login">Please log in to view this page.</h1>
+    <a href="{% url 'login' %}">
+        <button id="login" class="btn btn-outline-success" type="submit">Log In</button>
+    </a>
+</div>
+{% endblock %}

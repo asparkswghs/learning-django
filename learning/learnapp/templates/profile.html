@@ -24,7 +24,7 @@
 
 {% block content %}
 
-
+{% if request.user.is_authenticated %}
 <div class="card first-card">
     <div class="card-body">
         <h5 class="card-title">Profile</h5>
@@ -124,4 +124,7 @@
     </div>
 </div> {% endfor %}
 
+{% else %}
+{% include 'registration/error-login.html' %}
+{% endif %}
 {% endblock %}

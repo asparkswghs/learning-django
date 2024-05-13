@@ -15,7 +15,7 @@ def root(request):
 
 def students(request):
     if not request.user.is_authenticated:
-        return redirect(auth_login)
+        return render(request, 'registration/error-login.html', {})
     else:
         context = {
             'students': Student.objects.all(), # Pass all student objects
@@ -25,7 +25,7 @@ def students(request):
 
 def teachers(request):
     if not request.user.is_authenticated:
-        return redirect(auth_login)
+        return render(request, 'registration/error-login.html', {})
     else:
         context = {
             'teachers': Teacher.objects.all(), # Pass all teacher objects
@@ -37,7 +37,7 @@ def student_form(request):
 
     }
     if not request.user.is_authenticated:
-        return redirect(auth_login)
+        return render(request, 'registration/error-login.html', {})
     if request.method == 'POST': # For button click
         form = StudentForm(request.POST)
         if form.is_valid():
@@ -74,7 +74,7 @@ def teacher_form(request):
 
     }
     if not request.user.is_authenticated:
-        return redirect(auth_login)
+        return render(request, 'registration/error-login.html', {})
     if request.method == 'POST': # For button click
         form = TeacherForm(request.POST)
         if form.is_valid():
@@ -106,38 +106,43 @@ def teacher_form(request):
         context,
         )
 
-def auth_login(request):
+def login(request):
     form = AuthenticationForm()
     context = {
         'form': form,
     }
     if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(request,data=request.POST)
+        print(request.POST)
         try:
             user = authenticate(request.POST)
             login(request, user)
-            return redirect('/')
+            return redirect('/profile/')
         except:
-            return render(request, 'auth/login.html', {'form': AuthenticationForm()})
+            return render(request, 'registration/login.html', {'form': AuthenticationForm()})
 
-    return render(request, 'auth/login.html', {'form': AuthenticationForm()})
+    return render(request, 'registration/login.html', {'form': AuthenticationForm()})
 
-def auth_register(request):
+def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request,user)
-            return redirect('')
+            return redirect('/profile/')
         else:
             print('Registration: FORM IS INVALID.')
-            return render(request, 'auth/register.html', {'form': RegistrationForm()})
+            return render(request, 'registration/register.html', {'form': RegistrationForm()})
 
-    return render(request, 'auth/register.html', {'form': RegistrationForm()})
+    return render(request, 'registration/register.html', {'form': RegistrationForm()})
 
 def profile(request):
-    context = {
-        'student_accounts': Student.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
-        'teacher_accounts': Teacher.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
-    }
-    return render(request, 'profile.html', context)
+    if request.user.is_authenticated:
+        context = {
+            'student_accounts': Student.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
+            'teacher_accounts': Teacher.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
+        }
+        return render(request, 'profile.html', context)
+    else:
+        context = {}
+        return render(request, 'registration/error-login.html', context)

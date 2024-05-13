@@ -41,9 +41,7 @@ body {
         <img class="mb-4" src="{% static 'svg/mortarboard.svg' %}" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-        <!--{{ form }}-->
-
-        {% for field in form %}
+        <!--{% for field in form %}
             {% if field.label == 'Username' %}
                 <div class="form-floating">
                     <input type="text" class="form-control" id="floatingInput"  placeholder="johndoe" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
@@ -63,14 +61,16 @@ body {
                 </div>
             </div>
             {% endif %}
-        {% endfor %}
+        {% endfor %}-->
+
+        {{ form.as_p }}
 
         <br>
         <button class="btn btn-primary w-100 py-2" type="submit" value="submit">Sign in</button>
         <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
     </form>
     <br>
-    <h7>Don't have an account? <a href="{% url 'auth_register' %}">Register</a></h7>
+    <h7>Don't have an account? <a href="{% url 'register' %}">Register</a></h7>
 </main>
 
 {% endblock %}
