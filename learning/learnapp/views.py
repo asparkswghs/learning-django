@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required
-from .models import Student, Teacher
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import Student, Teacher, UserProfilePicture
 from .forms import StudentForm, TeacherForm, RegistrationForm
 
 # Create your views here.
@@ -14,6 +14,7 @@ def root(request):
     }
     return render(request, 'root.html', context)
 
+@user_passes_test(lambda u: u.groups.filter(name="teachers"))
 @login_required
 def students(request):
     context = {
@@ -136,5 +137,6 @@ def profile(request):
     context = {
         'student_accounts': Student.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
         'teacher_accounts': Teacher.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
+        'profile_picture': UserProfilePicture.objects.filter(user=request.user),
     }
     return render(request, 'profile.html', context)

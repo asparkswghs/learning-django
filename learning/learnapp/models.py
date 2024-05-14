@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Student(models.Model):
@@ -47,3 +48,10 @@ class Teacher(models.Model):
 
     def __str__(self):
         return f'{self.title}. {self.last_name}, {self.first_name}'
+
+class UserProfilePicture(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    picture = models.ImageField(default='profiles/default.svg', upload_to='profiles')
+
+    def display(self):
+        return f'<img src="{self.url}" alt="Avatar" style="vertical-align: middle; width: 150px; height: 150px; border-radius: 50%;">'
