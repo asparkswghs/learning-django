@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Student, Teacher, UserProfilePicture
-from .forms import StudentForm, TeacherForm, RegistrationForm
+from .forms import StudentForm, TeacherForm, RegistrationForm, ProfilePictureForm
 
 # Create your views here.
 
@@ -137,6 +137,14 @@ def profile(request):
     context = {
         'student_accounts': Student.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
         'teacher_accounts': Teacher.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
-        'profile_picture': UserProfilePicture.objects.filter(user=request.user),
+        'profile_picture': UserProfilePicture.objects.filter(user=request.user)[0],
+        'profile_picture_form': ProfilePictureForm()
     }
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST)
+        if form.is_valid():
+            pic = form.save(commit=False)
+            pic.user = request.user
+            pic.save()
+            return redirect('/profile/')
     return render(request, 'profile.html', context)

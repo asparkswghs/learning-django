@@ -24,10 +24,9 @@
 
 {% block content %}
 
-{% if request.user.is_authenticated %}
 <div class="card first-card">
     <div class="card-body">
-        <h5 class="card-title">Profile</h5>
+        <h5 class="card-title">Profile<br><img src="{{ profile_picture.picture.url }}" alt="{{ profile_picture.alt }}" ></h5>
         <h6 class="card-subtitle mb-2 text-body-secondary"><hr></h6>
         <p class="card-text">
             <table id="profile" class="table table-striped">
@@ -61,6 +60,16 @@
                         <ul>
                             {% for group in request.user.groups.all %}<li>{{ group.name }}</li>{% endfor %}
                         </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Profile Picture</th>
+                    <td>
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ profile_picture_form.as_p }}
+                            <button class="btn btn-primary" type="submit" name="submit">Upload</button>
+                        </form>
                     </td>
                 </tr>
             </table>
@@ -124,7 +133,4 @@
     </div>
 </div> {% endfor %}
 
-{% else %}
-{% include 'registration/error-login.html' %}
-{% endif %}
 {% endblock %}

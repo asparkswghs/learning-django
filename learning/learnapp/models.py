@@ -51,7 +51,8 @@ class Teacher(models.Model):
 
 class UserProfilePicture(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    picture = models.ImageField(default='profiles/default.svg', upload_to='profiles')
+    picture = models.ImageField(default='profiles/default.svg', upload_to='static/profiles/')
+    alt = models.CharField(max_length=500, null=True, default="Profile Picture")
 
-    def display(self):
-        return f'<img src="{self.url}" alt="Avatar" style="vertical-align: middle; width: 150px; height: 150px; border-radius: 50%;">'
+    def __str__(self):
+        return f'{self.user.username}\'s profile picture'
