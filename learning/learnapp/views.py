@@ -1,3 +1,4 @@
+from django.db.models import ImageField
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -146,10 +147,14 @@ def profile(request):
     }
     if request.method == 'POST':
         form = ProfilePictureForm(request.POST)
+        form.user = request.user
         if form.is_valid():
             submitted = form.save(commit=False)
-            profile_picture.picture = submitted.picture
-            profile_picture.alt = submitted.alt
-            profile_picture.save()
+            image = request.FILES['picture']
+            profile = UserProfilePicture.objects.filter(user=request.user)[0]
+            profile.alt = submitted.alt
+            profile.picture.save(image.name, image)
+            profile.save()
+
             return redirect('/profile/')
     return render(request, 'profile.html', context)
