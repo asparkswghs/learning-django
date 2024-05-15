@@ -52,7 +52,7 @@ class Teacher(models.Model):
 class UserProfilePicture(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     picture = models.ImageField(default='static/svg/profile-default.svg', upload_to='static/profiles/')
-    alt = models.CharField(max_length=500, null=True, default="Profile Picture")
+    alt = models.CharField(max_length=500, null=True, default="Profile Picture", verbose_name="Alt Text", help_text='(Add a short description of this image\'s significance, for users who cannot view images.)')
 
     def __str__(self):
         return f'{self.user.username}\'s profile picture'
