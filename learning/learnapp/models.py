@@ -51,7 +51,7 @@ class Teacher(models.Model):
 
 class UserProfilePicture(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    picture = models.ImageField(default='profiles/default.svg', upload_to='static/profiles/')
+    picture = models.ImageField(default='static/svg/profile-default.svg', upload_to='static/profiles/')
     alt = models.CharField(max_length=500, null=True, default="Profile Picture")
 
     def __str__(self):
