@@ -13,10 +13,25 @@
     margin-top: 2rem;
 }
 
+.profile-picture {
+    width: 20rem;
+    height: 20rem;
+    align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-right: 4rem;
+}
+
 @media only screen and (maxwidth: 1000px) {
     .card {
         width: 100%;
         background-color: red;
+    }
+}
+
+@media only screen and (minwidth: 900px) {
+    .card-body {
+        display: flex;
     }
 }
 </style>
@@ -26,7 +41,8 @@
 
 <div class="card first-card">
     <div class="card-body">
-        <h5 class="card-title">Profile<br><img src="{{ profile_picture.picture.url }}" alt="{{ profile_picture.alt }}" ></h5>
+        <h5 class="card-title">Profile</h5>
+        <img src="{{ profile_picture.picture.url }}" alt="{{ profile_picture.alt }}" class="profile-picture">
         <h6 class="card-subtitle mb-2 text-body-secondary"><hr></h6>
         <p class="card-text">
             <table id="profile" class="table table-striped">

@@ -134,17 +134,22 @@ def register(request):
 
 @login_required
 def profile(request):
+    try:
+        profile_picture = UserProfilePicture.objects.filter(user=request.user)[0]
+    except IndexError:
+        profile_picture = UserProfilePicture(user=request.user)
     context = {
         'student_accounts': Student.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
         'teacher_accounts': Teacher.objects.filter(last_name=request.user.last_name, first_name=request.user.first_name),
-        'profile_picture': UserProfilePicture.objects.filter(user=request.user)[0],
+        'profile_picture': profile_picture,
         'profile_picture_form': ProfilePictureForm()
     }
     if request.method == 'POST':
         form = ProfilePictureForm(request.POST)
         if form.is_valid():
-            pic = form.save(commit=False)
-            pic.user = request.user
-            pic.save()
+            submitted = form.save(commit=False)
+            profile_picture.picture = submitted.picture
+            profile_picture.alt = submitted.alt
+            profile_picture.save()
             return redirect('/profile/')
     return render(request, 'profile.html', context)
