@@ -151,10 +151,9 @@ def profile(request):
         if form.is_valid():
             submitted = form.save(commit=False)
             image = request.FILES['picture']
-            profile = UserProfilePicture.objects.filter(user=request.user)[0]
-            profile.alt = submitted.alt
-            profile.picture.save(image.name, image)
-            profile.save()
+            profile_picture.alt = submitted.alt
+            profile_picture.picture.save(image.name, image)
+            profile_picture.save()
 
             return redirect('/profile/')
     return render(request, 'profile.html', context)
