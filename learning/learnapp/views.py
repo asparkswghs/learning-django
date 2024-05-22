@@ -31,6 +31,7 @@ def teachers(request):
     }
     return render(request, 'teachers.html', context)
 
+@user_passes_test(lambda u: u.groups.filter(name="teachers"))
 @login_required
 def student_form(request):
     context = {
@@ -67,6 +68,7 @@ def student_form(request):
         context,
         )
 
+@user_passes_test(lambda u: u.groups.filter(name="teachers"))
 @login_required
 def teacher_form(request):
     context = {
